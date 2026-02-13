@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Valentine's Special</title>
+    <!-- Link external CSS -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div class="container" id="mainContainer">
+   
+        <div class="photo-block">
+            <img src="WhatsApp Image 2026-02-13 at 6.21.38 PM.jpeg" id="userPhoto" alt="Our Photo">
+        </div>
+
+        <div class="media-container" id="mediaBox">
+            <img src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExOHpueW9idmZ4ZzB4bm93amZ4eHh4eHh4eHh4eHh4eHh4eHh4ZSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/MDJ9IbxxvDUQM/giphy.gif" alt="Initial Cat">
+        </div>
+        
+        <h1 id="headline">Will you be my Valentine siruuu❤️?</h1>
+        
+        <div class="btn-wrapper">
+            <button id="yesBtn" onclick="onYes()">Yes</button>
+            <button id="noBtn" onclick="onNo()">No</button>
+        </div>
+    </div>
+
+    <script>
+        let noClickCount = 0;
+
+        const sadCats = [
+            "https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExNHR1dzZ6ZXZ4ZzB4bm93amZ4eHh4eHh4eHh4eHh4eHh4eHh4ZSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/vHwGAMZfWj3PrAyf8S/giphy.gif",
+            "https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExOXM2amZ4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4ZSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/OPU6wUKARA9pu/giphy.gif",
+            "https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExOXA1amZ4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4ZSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/10tIra7I5cKnoQ/giphy.gif"
+        ];
+
+        const sadMessages = [
+            "Wait, think again!",
+            "Are you really sure?",
+            "You're breaking my heart! 💔",
+            "I'm gonna cry... 😭"
+        ];
+
+        const happyCat = "https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExOHRyeXpzeXZ4ZzB4bm93amZ4eHh4eHh4eHh4eHh4eHh4eHh4ZSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/KztT2c4u8mYYUiMKdJ/giphy.gif";
+
+        function onNo() {
+            noClickCount++;
+            const img = document.querySelector('#mediaBox img');
+            const h1 = document.getElementById('headline');
+            const yesBtn = document.getElementById('yesBtn');
+
+            img.src = sadCats[Math.min(noClickCount - 1, sadCats.length - 1)];
+            h1.innerText = sadMessages[Math.min(noClickCount - 1, sadMessages.length - 1)];
+
+            let newSize = 1.2 + (noClickCount * 0.4);
+            yesBtn.style.transform = `scale(${newSize})`;
+            
+            const noBtn = document.getElementById('noBtn');
+            noBtn.style.transform = `translateX(${noClickCount % 2 === 0 ? 10 : -10}px)`;
+        }
+
+        function onYes() {
+            const container = document.getElementById('mainContainer');
+            const userPic = document.getElementById('userPhoto').src;
+            
+            container.innerHTML = `
+                <div class="photo-block" style="width:150px; height:150px;">
+                    <img src="WhatsApp Image 2026-02-13 at 6.46.27 PM.jpeg" alt="Happy Us">
+                </div>
+                <div class="media-container">
+                    <img src="${happyCat}" alt="Happy Celebration">
+                </div>
+                <h1 style="color: #ff4d6d;">AAKHIR ME MANHI GAINA ❤️</h1>
+                <p style="font-size: 1.2rem; color: #666;">I knew you'd say yes! siru babe</p>
+            `;
+            
+            document.body.style.background = "linear-gradient(135deg, #ffafbd 0%, #ffc3a0 100%)";
+            spawnHearts();
+        }
+
+        function createBubbles() {
+            for(let i=0; i<15; i++) {
+                let b = document.createElement('div');
+                b.className = 'bubble';
+                let size = Math.random() * 50 + 10;
+                b.style.width = size + 'px';
+                b.style.height = size + 'px';
+                b.style.left = Math.random() * 100 + 'vw';
+                b.style.animationDelay = Math.random() * 5 + 's';
+                document.body.appendChild(b);
+            }
+        }
+
+        function spawnHearts() {
+            for(let i=0; i<30; i++) {
+                setTimeout(() => {
+                    let h = document.createElement('div');
+                    h.className = 'heart-icon';
+                    h.innerHTML = '❤️';
+                    h.style.left = Math.random() * 100 + 'vw';
+                    h.style.top = '100vh';
+                    h.style.fontSize = (Math.random() * 30 + 10) + 'px';
+                    h.style.animation = `floatUp ${Math.random() * 3 + 2}s forwards`;
+                    document.body.appendChild(h);
+                }, i * 100);
+            }
+        }
+
+        createBubbles();
+    </script>
+</body>
+</html>
